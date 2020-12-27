@@ -191,7 +191,7 @@ class AccountController extends Controller {
         redirectTo(BASE_URL . 'account/change_password');
       }
 
-      $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+      $hashedPassword = password_hash($newPassword, PASSWORD_HASH);
       User::findByIdAndUpdate($userId, ['password' => $hashedPassword]);
 
       redirectTo(BASE_URL . 'account');

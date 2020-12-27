@@ -83,7 +83,7 @@ class RegistrationController extends Controller {
       }
 
       $emailVerificationToken = generateToken();
-      $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+      $hashedPassword = password_hash($password, PASSWORD_HASH);
       User::create([
         'name' => $name,
         'email' => $email,

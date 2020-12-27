@@ -71,7 +71,7 @@ class PasswordResetController extends Controller {
       }
 
       $userId = $_SESSION['user_id_to_reset_pass'] ?? null;
-      $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+      $hashedPassword = password_hash($password, PASSWORD_HASH);
 
       User::findByIdAndUpdate($userId, [
         'password' => $hashedPassword

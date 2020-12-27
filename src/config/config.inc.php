@@ -3,6 +3,8 @@ session_start();
 
 define('BASE_URL', 'http://localhost:8080/');
 
+define('PASSWORD_HASH', PASSWORD_BCRYPT);
+
 define('DB_DRIVER', 'mysql');
 define('DB_HOST', '18.0.5.3');
 define('DB_NAME', 'nooio');
