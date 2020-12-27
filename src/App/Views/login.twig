@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
+</head>
+
+<body>
+
+  {% if error_message %}
+  <div class="alert alert-danger">{{ error_message }}</div>
+  {% elseif success_message %}
+  <div class="alert alert-success">{{ success_message }}</div>
+  {% endif %}
+
+  <div class="container center">
+    <h1 class="title">Login</h1>
+    <form method="POST" action="" name="form-login">
+      <div class="form-group">
+        <label for="email"></label>
+        <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255" required />
+      </div>
+      <div class="form-group">
+        <label for="password"></label>
+        <input type="password" name="password" id="password" aria-label="password" placeholder="Senha" maxlength="50" required />
+      </div>
+
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
+      <button class="btn" type="submit" name="btn-login">Entrar</button>
+      <p><small>Não possui uma conta ? <a href="{{ constant('BASE_URL') }}register">Crie uma agora.</a></small></p>
+      <p><small>Esqueceu a sua senha ? <a href="{{ constant('BASE_URL') }}recover_password">Recupere aqui.</a></small></p>
+    </form>
+  </div>
+
+  <script type="module" src="{{ constant('BASE_URL') }}assets/js/login.js"></script>
+</body>
+
+</html>

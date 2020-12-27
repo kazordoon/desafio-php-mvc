@@ -1,0 +1,27 @@
+{
+  "name": "kazordoon/nooio-desafio-php-mvc",
+  "description": "Desafio",
+  "autoload": {
+    "psr-4": {
+      "App\\Models\\": "App/Models/",
+      "App\\Controllers\\": "App/Controllers/",
+      "App\\Core\\": "App/Core/",
+      "App\\Database\\": "App/Database/",
+      "App\\Validators\\": "App/Validators/",
+      "App\\Providers\\": "Providers/"
+    },
+    "files": [
+      "utils/redirectTo.php",
+      "utils/clearSessionMessages.php",
+      "utils/generateToken.php",
+      "utils/sendEmailVerificationLink.php"
+    ]
+  },
+  "require": {
+    "coffeecode/router": "^1.0",
+    "twig/twig": "^3.0",
+    "twig/intl-extra": "^3.0",
+    "phpmailer/phpmailer": "^6.1",
+    "pecee/pixie": "^4.11"
+  }
+}

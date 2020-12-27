@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Cadastro</title>
+	<link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
+</head>
+<body>
+
+	{% if error_message %}
+	<div class="alert alert-danger">{{ error_message }}</div>
+	{% endif %}
+
+	<div class="container center">
+		<h1 class="title">Cadastro</h1>
+		<form method="POST" action="" name="form-register">
+			<div class="form-group">
+				<label for="name"></label>
+				<input type="name" name="name" id="name" aria-label="name" placeholder="Nome" maxlength="255" required />
+			</div>
+			<div class="form-group">
+				<label for="email"></label>
+				<input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255" required />
+			</div>
+			<div class="form-group">
+				<label for="password"></label>
+				<input type="password" name="password" id="password" aria-label="password" placeholder="Senha" minlength="8"
+					maxlength="50" required />
+			</div>
+			<div class="form-group">
+				<label for="repeatedPassword"></label>
+				<input type="password" name="repeatedPassword" id="repeatedPassword" aria-label="repeatedPassword"
+					placeholder="Repita sua senha" minlength="8" maxlength="50" required />
+			</div>
+
+      <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
+			<button class="btn" type="submit" name="btn-register">Cadastrar</button>
+			<p><small>Já possui uma conta ? <a href="{{ constant('BASE_URL') }}login">Entre aqui.</a></small></p>
+		</form>
+	</div>
+
+	<script type="module" src="{{ constant('BASE_URL') }}assets/js/register.js"></script>
+</body>
+</html>
