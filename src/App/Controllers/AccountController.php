@@ -9,14 +9,18 @@ use App\Models\User;
 use App\Validators\UserValidator;
 
 class AccountController extends Controller {
-  public function index() {
+  public function redirectIfNotLoggedIn() {
+    $isNotLoggedIn = !isset($_SESSION['user_id']);
 
-    $userId = $_SESSION['user_id'] ?? null;
-
-    if (!$userId) {
+    if ($isNotLoggedIn) {
       redirectTo(BASE_URL . 'login');
     }
+  }
 
+  public function index() {
+    $this->redirectIfNotLoggedIn();
+
+    $userId = $_SESSION['user_id'] ?? null;
     $user = User::findById($userId);
 
     $data = [
@@ -31,18 +35,16 @@ class AccountController extends Controller {
   }
 
   public function editName() {
-    $userId = $_SESSION['user_id'] ?? null;
-
-    if (!$userId) {
-      redirectTo(BASE_URL . 'login');
-    }
+    $this->redirectIfNotLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
     $csrfToken = generateToken();
     $_SESSION['csrf_token'] = $csrfToken;
 
+    $userId = $_SESSION['user_id'] ?? null;
     $user = User::findById($userId);
+
     $data = [
       'name' => $user->name,
       'error_message' => $errorMessage,
@@ -55,14 +57,10 @@ class AccountController extends Controller {
   }
 
   public function updateName() {
+    $this->redirectIfNotLoggedIn();
+
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
-      $userId = $_SESSION['user_id'] ?? null;
-
-      if (!$userId) {
-        redirectTo(BASE_URL . 'login');
-      }
-
       $name = filter_input(INPUT_POST, 'name');
 
       if (empty($name)) {
@@ -76,6 +74,7 @@ class AccountController extends Controller {
         redirectTo(BASE_URL . 'account/change_name');
       }
 
+      $userId = $_SESSION['user_id'] ?? null;
       User::findByIdAndUpdate($userId, ['name' => $name]);
 
       redirectTo(BASE_URL . 'account');
@@ -83,18 +82,16 @@ class AccountController extends Controller {
   }
 
   public function editEmail() {
-    $userId = $_SESSION['user_id'] ?? null;
-
-    if (!$userId) {
-      redirectTo(BASE_URL . 'login');
-    }
+    $this->redirectIfNotLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
     $csrfToken = generateToken();
     $_SESSION['csrf_token'] = $csrfToken;
 
+    $userId = $_SESSION['user_id'] ?? null;
     $user = User::findById($userId);
+
     $data = [
       'email' => $user->email,
       'error_message' => $errorMessage,
@@ -107,14 +104,10 @@ class AccountController extends Controller {
   }
 
   public function updateEmail() {
+    $this->redirectIfNotLoggedIn();
+
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
-      $userId = $_SESSION['user_id'] ?? null;
-
-      if (!$userId) {
-        redirectTo(BASE_URL . 'login');
-      }
-
       $email = filter_input(INPUT_POST, 'email');
 
       if (empty($email)) {
@@ -136,6 +129,7 @@ class AccountController extends Controller {
         redirectTo(BASE_URL . 'account/change_email');
       }
 
+      $userId = $_SESSION['user_id'] ?? null;
       User::findByIdAndUpdate($userId, ['email' => $email, 'verified' => false]);
 
       $emailVerificationPage = BASE_URL . "send_verification_email?email={$email}";
@@ -144,11 +138,7 @@ class AccountController extends Controller {
   }
 
   public function editPassword() {
-    $userId = $_SESSION['user_id'] ?? null;
-
-    if (!$userId) {
-      redirectTo(BASE_URL . 'login');
-    }
+    $this->redirectIfNotLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
@@ -166,14 +156,11 @@ class AccountController extends Controller {
   }
 
   public function updatePassword() {
+    $this->redirectIfNotLoggedIn();
+
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
       $userId = $_SESSION['user_id'] ?? null;
-
-      if (!$userId) {
-        redirectTo(BASE_URL . 'login');
-      }
-
       $user = User::findById($userId);
 
       $currentPassword = filter_input(INPUT_POST, 'currentPassword');

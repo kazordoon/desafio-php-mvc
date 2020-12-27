@@ -55,8 +55,6 @@ class PasswordResetController extends Controller {
   public function reset() {
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
-      $userId = $_SESSION['user_id_to_reset_pass'] ?? null;
-
       $password = filter_input(INPUT_POST, 'password');
       $repeatedPassword = filter_input(INPUT_POST, 'repeatedPassword');
 
@@ -72,7 +70,9 @@ class PasswordResetController extends Controller {
         redirectTo(BASE_URL . $_SERVER['REQUEST_URI']);
       }
 
+      $userId = $_SESSION['user_id_to_reset_pass'] ?? null;
       $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
       User::findByIdAndUpdate($userId, [
         'password' => $hashedPassword
       ]);
@@ -85,7 +85,7 @@ class PasswordResetController extends Controller {
       unset($_SESSION['user_id']);
 
       $_SESSION['success_message'] = 'Sua senha foi atualizada com sucesso.';
-      redirectTo(BASE_URL);
+      redirectTo(BASE_URL . 'account');
     }
   }
 }

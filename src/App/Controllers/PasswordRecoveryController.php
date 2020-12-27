@@ -12,12 +12,15 @@ use App\Validators\UserValidator;
 use PHPMailer\PHPMailer\Exception;
 
 class PasswordRecoveryController extends Controller {
-  public function index() {
-    $isTheUserLoggedIn = isset($_SESSION['userId']);
-
+  public function redirectIfLoggedIn() {
+    $isTheUserLoggedIn = isset($_SESSION['user_id']);
     if ($isTheUserLoggedIn) {
-      redirectTo(BASE_URL);
+      redirectTo(BASE_URL . 'account');
     }
+  }
+
+  public function index() {
+    $this->redirectIfLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
     $successMessage = $_SESSION['success_message'] ?? null;
@@ -37,6 +40,8 @@ class PasswordRecoveryController extends Controller {
   }
 
   public function sendRecoveryToken() {
+    $this->redirectIfLoggedIn();
+
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
       $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
