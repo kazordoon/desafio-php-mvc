@@ -16,6 +16,11 @@ class Model {
     return 1;
   }
 
+  public static function findAll() {
+    $data = static::getTable()->get();
+    return $data;
+  }
+
   public static function findOne(array $payload) {
     $data = static::getTable();
     foreach ($payload as $key => $value) {

@@ -6,6 +6,8 @@ $router = new Router(BASE_URL);
 
 $router->namespace('\App\Controllers');
 
+$router->get('/products', 'ProductsController:index');
+
 $router->get('/account', 'AccountController:index');
 
 $router->get('/account/change_name', 'AccountController:editName');

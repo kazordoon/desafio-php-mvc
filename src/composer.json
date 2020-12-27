@@ -15,7 +15,8 @@
       "utils/redirectTo.php",
       "utils/clearSessionMessages.php",
       "utils/generateToken.php",
-      "utils/sendEmailVerificationLink.php"
+      "utils/sendEmailVerificationLink.php",
+      "utils/formatPrice.php"
     ]
   },
   "require": {
