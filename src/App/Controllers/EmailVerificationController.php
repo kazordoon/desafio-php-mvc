@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Errors\AccountErrors;
+use App\Errors\TokenErrors;
+use App\Errors\ValidationErrors;
 use App\Models\User;
 use App\Validators\UserValidator;
 
@@ -13,13 +16,13 @@ class EmailVerificationController extends Controller {
 
     $isTheEmailFieldEmpty = empty($email);
     if ($isTheEmailFieldEmpty) {
-      $_SESSION['error_message'] = 'Preencha o campo de e-mail.';
+      $_SESSION['error_message'] = ValidationErrors::EMPTY_EMAIL_FIELD;
       redirectTo(BASE_URL . 'recover_password');
     }
 
     $isAnInvalidEmail = !UserValidator::isAValidEmail($email);
     if ($isAnInvalidEmail) {
-      $_SESSION['error_message'] = 'O e-mail fornecido tem um formato inválido.';
+      $_SESSION['error_message'] = ValidationErrors::INVALID_EMAIL_FORMAT;
       redirectTo(BASE_URL . 'register');
     }
 
@@ -27,19 +30,19 @@ class EmailVerificationController extends Controller {
 
     $userNotFound = !$user;
     if ($userNotFound) {
-      $_SESSION['error_message'] = 'Não há nenhuma conta associada ao e-mail fornecido.';
+      $_SESSION['error_message'] = AccountErrors::ACCOUNT_NOT_FOUND;
       redirectTo(BASE_URL . 'login');
     }
 
     $emailAlreadyVerified = $user->verified;
     if ($emailAlreadyVerified) {
-      $_SESSION['error_message'] = 'Este e-mail já foi verificado antes.';
+      $_SESSION['error_message'] = AccountErrors::EMAIL_ALREADY_VERIFIED;
       redirectTo(BASE_URL . 'login');
     }
 
     $isAnInvalidEmailVerificationToken = $user->email_verification_token !== $emailVerificationToken;
     if ($isAnInvalidEmailVerificationToken) {
-      $_SESSION['error_message'] = 'Código inválido.';
+      $_SESSION['error_message'] = TokenErrors::INVALID_TOKEN;
       redirectTo(BASE_URL . 'login');
     }
 

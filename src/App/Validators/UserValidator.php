@@ -17,8 +17,4 @@ class UserValidator {
     $maxLength = 50;
     return strlen($password) >= $minLength && strlen($password) <= $maxLength;
   }
-
-  public static function areThePasswordsTheSame(string $password1, string $password2) {
-    return $password1 === $password2;
-  }
 }

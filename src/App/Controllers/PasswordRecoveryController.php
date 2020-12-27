@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Errors\AccountErrors;
+use App\Errors\MailErrors;
+use App\Errors\ValidationErrors;
 use App\Models\User;
 use App\Providers\Mail;
 use App\Validators\UserValidator;
@@ -40,13 +43,13 @@ class PasswordRecoveryController extends Controller {
 
       $isTheEmailFieldEmpty = empty($email);
       if ($isTheEmailFieldEmpty) {
-        $_SESSION['error_message'] = 'Preencha o campo de e-mail.';
+        $_SESSION['error_message'] = ValidationErrors::EMPTY_EMAIL_FIELD;
         redirectTo(BASE_URL . 'recover_password');
       }
 
       $isAnInvalidEmail = !UserValidator::isAValidEmail($email);
       if ($isAnInvalidEmail) {
-        $_SESSION['error_message'] = 'O e-mail fornecido tem um formato inválido.';
+        $_SESSION['error_message'] = ValidationErrors::INVALID_EMAIL_FORMAT;
         redirectTo(BASE_URL . 'register');
       }
 
@@ -54,7 +57,7 @@ class PasswordRecoveryController extends Controller {
 
       $userNotFound = !$user;
       if ($userNotFound) {
-        $_SESSION['error_message'] = 'Não há nenhuma conta associada ao email fornecido.';
+        $_SESSION['error_message'] = AccountErrors::ACCOUNT_NOT_FOUND;
         redirectTo(BASE_URL . 'recover_password');
       }
 
@@ -77,7 +80,7 @@ class PasswordRecoveryController extends Controller {
         $mail->send();
         $_SESSION['success_message'] = 'Uma mensagem de e-mail com o link de recuperação de senha foi enviada para sua caixa de entrada.';
       } catch (Exception $e) {
-        $_SESSION['error_message'] = 'Não foi possível enviar uma mensagem de e-mail para seu e-mail, tente novamente.';
+        $_SESSION['error_message'] = MailErrors::EMAIL_NOT_SENT;
       }
 
       redirectTo(BASE_URL . 'recover_password');

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Errors\MailErrors;
 use App\Models\User;
 use PHPMailer\PHPMailer\Exception;
 
@@ -38,7 +39,7 @@ class EmailCheckSendingController extends Controller {
     try {
       sendEmailVerificationLink($user, $emailVerificationToken);
     } catch (Exception $e) {
-      $_SESSION['error_message'] = 'Não foi possível enviar um e-mail de confirmação, tente novamente.';
+      $_SESSION['error_message'] = MailErrors::EMAIL_NOT_SENT;
       redirectTo(BASE_URL . 'login');
     }
 

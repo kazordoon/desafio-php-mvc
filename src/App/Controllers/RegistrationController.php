@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Errors\AccountErrors;
+use App\Errors\ValidationErrors;
 use App\Models\User;
 use App\Validators\UserValidator;
 
@@ -55,18 +57,15 @@ class RegistrationController extends Controller {
         redirectTo(BASE_URL . 'register');
       }
 
-      $passwordsAreDifferent = !UserValidator::areThePasswordsTheSame(
-        $password,
-        $repeatedPassword
-      );
+      $passwordsAreDifferent = $password !== $repeatedPassword;
       if ($passwordsAreDifferent) {
-        $_SESSION['error_message'] = 'As senhas não coincidem.';
+        $_SESSION['error_message'] = ValidationErrors::DIFFERENT_PASSWORDS;
         redirectTo(BASE_URL . 'register');
       }
 
       $isAnInvalidEmail = !UserValidator::isAValidEmail($email);
       if ($isAnInvalidEmail) {
-        $_SESSION['error_message'] = 'O e-mail fornecido possui um formato inválido.';
+        $_SESSION['error_message'] = ValidationErrors::INVALID_EMAIL_FORMAT;
         redirectTo(BASE_URL . 'register');
       }
 
@@ -74,7 +73,7 @@ class RegistrationController extends Controller {
 
       $userAlreadyExists = !empty($user);
       if ($userAlreadyExists) {
-        $_SESSION['error_message'] = 'Este endereço de e-mail já está em uso.';
+        $_SESSION['error_message'] = AccountErrors::EMAIL_ALREADY_IN_USE;
         redirectTo(BASE_URL . 'register');
       }
 

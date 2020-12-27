@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Errors\AccountErrors;
+use App\Errors\ValidationErrors;
 use App\Models\User;
 use App\Validators\UserValidator;
 
@@ -64,13 +66,13 @@ class AccountController extends Controller {
       $name = filter_input(INPUT_POST, 'name');
 
       if (empty($name)) {
-        $_SESSION['error_message'] = 'Preencha o campo do nome.';
+        $_SESSION['error_message'] = ValidationErrors::EMPTY_NAME_FIELD;
         redirectTo(BASE_URL . 'account/change_name');
       }
 
       $hasAnInvalidNameLength = !UserValidator::hasAValidNameLength($name);
       if ($hasAnInvalidNameLength) {
-        $_SESSION['error_message'] = 'Nome muito comprido, utilize apenas nome e sobrenome.';
+        $_SESSION['error_message'] = ValidationErrors::INVALID_NAME_LENGTH;
         redirectTo(BASE_URL . 'account/change_name');
       }
 
@@ -116,13 +118,13 @@ class AccountController extends Controller {
       $email = filter_input(INPUT_POST, 'email');
 
       if (empty($email)) {
-        $_SESSION['error_message'] = 'Preencha o campo do email.';
+        $_SESSION['error_message'] = ValidationErrors::EMPTY_EMAIL_FIELD;
         redirectTo(BASE_URL . 'account/change_email');
       }
 
       $isAnInvalidEmail = !UserValidator::isAValidEmail($email);
       if ($isAnInvalidEmail) {
-        $_SESSION['error_message'] = 'O e-mail fornecido possui um formato inválido.';
+        $_SESSION['error_message'] = ValidationErrors::INVALID_EMAIL_FORMAT;
         redirectTo(BASE_URL . 'account/change_email');
       }
 
@@ -130,7 +132,7 @@ class AccountController extends Controller {
 
       $emailAlreadyInUse = !empty($user);
       if ($emailAlreadyInUse) {
-        $_SESSION['error_message'] = 'Este endereço de e-mail já está em uso.';
+        $_SESSION['error_message'] = AccountErrors::EMAIL_ALREADY_IN_USE;
         redirectTo(BASE_URL . 'account/change_email');
       }
 
@@ -180,28 +182,25 @@ class AccountController extends Controller {
 
       $areTheFieldsEmpty = empty($currentPassword) || empty($newPassword) || empty($newRepeatedPassword);
       if ($areTheFieldsEmpty) {
-        $_SESSION['error_message'] = 'Preencha todos os campos.';
+        $_SESSION['error_message'] = ValidationErrors::EMPTY_FIELDS;
         redirectTo(BASE_URL . 'account/change_password');
       }
 
       $isThePasswordIncorrect = !password_verify($currentPassword, $user->password);
       if ($isThePasswordIncorrect) {
-        $_SESSION['error_message'] = 'A senha atual está incorreta.';
+        $_SESSION['error_message'] = AccountErrors::INCORRECT_PASSWORD;
         redirectTo(BASE_URL . 'account/change_password');
       }
 
       $hasAnInvalidPasswordLength = !UserValidator::hasAValidPasswordLength($newPassword);
       if ($hasAnInvalidPasswordLength) {
-        $_SESSION['error_message'] = 'A senha deve ter entre 5 e 50 carácteres.';
+        $_SESSION['error_message'] = ValidationErrors::INVALID_PASSWORD_LENGTH;
         redirectTo(BASE_URL . 'account/change_password');
       }
 
-      $passwordsAreDifferent = !UserValidator::areThePasswordsTheSame(
-        $newPassword,
-        $newRepeatedPassword
-      );
+      $passwordsAreDifferent = $newPassword !== $newRepeatedPassword;
       if ($passwordsAreDifferent) {
-        $_SESSION['error_message'] = 'As senhas não coincidem.';
+        $_SESSION['error_message'] = ValidationErrors::DIFFERENT_PASSWORDS;
         redirectTo(BASE_URL . 'account/change_password');
       }
 

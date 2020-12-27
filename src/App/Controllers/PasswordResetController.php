@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Errors\AccountErrors;
+use App\Errors\TokenErrors;
+use App\Errors\ValidationErrors;
 use App\Models\User;
 use App\Validators\UserValidator;
 
@@ -17,20 +20,20 @@ class PasswordResetController extends Controller {
 
     $userNotFound = !$user;
     if ($userNotFound) {
-      $_SESSION['error_message'] = 'Não há nenhuma conta associada ao email fornecido..';
+      $_SESSION['error_message'] = AccountErrors::ACCOUNT_NOT_FOUND;
       redirectTo(BASE_URL . 'recover_password');
     }
 
     $hasAnInvalidPasswordRecoveryToken = $user->password_recovery_token !== $passwordRecoveryToken;
     if ($hasAnInvalidPasswordRecoveryToken) {
-      $_SESSION['error_message'] = 'Código inválido.';
+      $_SESSION['error_message'] = TokenErrors::INVALID_TOKEN;
       redirectTo(BASE_URL . 'recover_password');
     }
 
     $now = date('Y-m-d H:i:s', time());
     $passwordRecoveryTokenHasExpired = $user->password_token_expiration_time < $now;
     if ($passwordRecoveryTokenHasExpired) {
-      $_SESSION['error_message'] = 'O código para a recuperação de senha expirou.';
+      $_SESSION['error_message'] = TokenErrors::EXPIRED_TOKEN;
       redirectTo(BASE_URL . 'recover_password');
     }
 
@@ -59,16 +62,13 @@ class PasswordResetController extends Controller {
 
       $hasAnInvalidPasswordLength = !UserValidator::hasAValidPasswordLength($password);
       if ($hasAnInvalidPasswordLength) {
-        $_SESSION['error_message'] = 'A senha deve ter entre 8 e 50 carácteres.';
+        $_SESSION['error_message'] = ValidationErrors::INVALID_PASSWORD_LENGTH;
         redirectTo(BASE_URL . $_SERVER['REQUEST_URI']);
       }
 
-      $passwordsAreDifferent = !UserValidator::areThePasswordsTheSame(
-        $password,
-        $repeatedPassword
-      );
+      $passwordsAreDifferent = $password !== $repeatedPassword;
       if ($passwordsAreDifferent) {
-        $_SESSION['error_message'] = 'As senhas não coincidem.';
+        $_SESSION['error_message'] = ValidationErrors::DIFFERENT_PASSWORDS;
         redirectTo(BASE_URL . $_SERVER['REQUEST_URI']);
       }
 
