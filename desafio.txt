@@ -1,0 +1,23 @@
+Desafio
+Após o cliente escolher uma forma de pagamento de um produto
+Ele deverá criar seu login
+Após o pagamento confirmado de um plano determinado
+O sistema deverá liberar à ele um componente (um recurso) 
+dentro do Sistema Administrador (Admin do Cliente)
+
+Vc pode usar sua criatividade e inverter situação
+Como vc desejar, tipo:
+Login primeiro
+Pagamento depois
+Não importa
+o resultado tem que ser:
+Tem que haver 1 cadastro
+Tem que haver 1 pagamento
+Tem que haver 1 liberação de um determinado Recurso
+Ainda mais:
+Vc tem que apresentar a versão
+Sem pagamento
+Em que o usuário/Cliente poderá cadastrar-se e acessar recursos de cadastro apenas como:
+alterar nome
+alterar senha
+Etc.
