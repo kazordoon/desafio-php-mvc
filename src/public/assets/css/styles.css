@@ -12,6 +12,35 @@ body {
   background-color: #f1f1f1;
 }
 
+input[readonly] {
+  filter: brightness(90%);
+  color: #555;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.highlight-success {
+  color: #188a32;
+}
+
+.highlight-danger {
+  color: #9b1a27;
+}
+
 .container {
   width: 90vw;
   max-width: 1200px;
@@ -83,20 +112,4 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
-}
-
-form {
-  width: 100%;
-  max-width: 600px;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-a:hover {
-  color: #0056b3;
-  text-decoration: underline;
 }

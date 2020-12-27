@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Alteração de nome</title>
+	<link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
+</head>
+
+<body>
+
+	{% if error_message %}
+	<div class="alert alert-danger">{{ error_message }}</div>
+	{% endif %}
+
+	<div class="container center">
+		<h1 class="title">Alteração de nome</h1>
+		<form method="POST" action="" name="form-name">
+			<div class="form-group">
+				<label for="name"></label>
+				<input type="text" name="name" id="name" aria-label="name" placeholder="Nome" maxlength="255" value="{{ name }}"
+					required />
+			</div>
+
+			<input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
+			<button class="btn" type="submit" name="btn-recover">Alterar</button>
+		</form>
+	</div>
+</body>
+
+</html>

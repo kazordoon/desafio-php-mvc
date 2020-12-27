@@ -10,7 +10,7 @@ class AuthController extends Controller {
     $isTheUserLoggedIn = isset($_SESSION['user_id']);
 
     if ($isTheUserLoggedIn) {
-      redirectTo(BASE_URL);
+      redirectTo(BASE_URL . 'account');
     }
 
     $successMessage = $_SESSION['success_message'] ?? null;
@@ -64,7 +64,7 @@ class AuthController extends Controller {
 
       $_SESSION['user_id'] = $user->id;
 
-      redirectTo(BASE_URL);
+      redirectTo(BASE_URL . 'account');
     }
   }
 }

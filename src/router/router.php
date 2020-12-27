@@ -6,7 +6,16 @@ $router = new Router(BASE_URL);
 
 $router->namespace('\App\Controllers');
 
-$router->get('/', 'AccountController:index');
+$router->get('/account', 'AccountController:index');
+
+$router->get('/account/change_name', 'AccountController:editName');
+$router->post('/account/change_name', 'AccountController:updateName');
+
+$router->get('/account/change_email', 'AccountController:editEmail');
+$router->post('/account/change_email', 'AccountController:updateEmail');
+
+$router->get('/account/change_password', 'AccountController:editPassword');
+$router->post('/account/change_password', 'AccountController:updatePassword');
 
 $router->get('/login', 'AuthController:index');
 $router->post('/login', 'AuthController:auth');
