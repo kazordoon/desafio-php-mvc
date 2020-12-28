@@ -23,7 +23,11 @@
         <img src="{{ product.image_url }}" alt="{{ product.name }}" />
         <p><strong>{{ product.name }} | {{ product.price }}</strong></p>
         {% if logged_in %}
-        <a href="#">Adicionar ao carrinho</a>
+          {%if cart['products'][product.id] %}
+          <p class="highlight-success">Adicionado</p>
+          {% else %}
+          <a href="#">Adicionar ao carrinho</a>
+          {% endif %}
         {% endif %}
       </div>
     {% endfor %}

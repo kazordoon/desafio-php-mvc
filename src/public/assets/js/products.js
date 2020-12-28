@@ -18,7 +18,12 @@
 
     productsIds.push(productId);
     sessionStorage.setItem('productsIds', productsIds);
-    alert('Produto adicionado ao carrinho.');
+
+    const successMessage = document.createElement('p');
+    successMessage.textContent = 'Adicionado';
+    successMessage.className = 'highlight-success';
+
+    event.target.replaceWith(successMessage);
   }
 
   async function addProductsToCart() {
