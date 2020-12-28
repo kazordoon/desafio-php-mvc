@@ -7,7 +7,7 @@ use App\Models\Product;
 
 class ProductsController extends Controller {
   public function index() {
-    $products = Product::findAll();
+    $products = Product::findAvailable();
     $cart = $_SESSION['cart'] ?? [];
 
     foreach ($products as $product) {
