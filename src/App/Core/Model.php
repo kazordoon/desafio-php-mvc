@@ -21,7 +21,7 @@ class Model {
     return $data;
   }
 
-  public static function findOne(array $payload) {
+  public static function find(array $payload) {
     $data = static::getTable();
     foreach ($payload as $key => $value) {
       $data->where($key, '=', $value);
