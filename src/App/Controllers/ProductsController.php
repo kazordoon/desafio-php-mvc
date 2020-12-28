@@ -13,8 +13,10 @@ class ProductsController extends Controller {
       $product->price = formatPrice($product->price);
     }
 
+    $isTheUserLoggedIn = isset($_SESSION['user_id']);
     $data = [
-      'products' => $products
+      'products' => $products,
+      'logged_in' => $isTheUserLoggedIn
     ];
 
     $this->render('products', $data);

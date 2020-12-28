@@ -6,6 +6,9 @@ $router = new Router(BASE_URL);
 
 $router->namespace('\App\Controllers');
 
+$router->get('/cart', 'CartController:index');
+$router->post('/cart', 'CartController:store');
+
 $router->get('/products', 'ProductsController:index');
 
 $router->get('/account', 'AccountController:index');

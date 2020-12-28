@@ -4,32 +4,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Produtos</title>
+  <title>Carrinho</title>
   <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-  <style>
-    .products-container {
-      display: flex;
-
-      justify-content: space-evenly;
-    }
-  </style>
 </head>
 
 <body>
-  <div class="container products-container">
-    <a id="go-to-cart" href="#">Ir para o carrinho</a>
+  <div class="container center">
     {% for product in products %}
       <div class="product" data-id="{{ product.id }}">
         <img src="{{ product.image_url }}" alt="{{ product.name }}" />
         <p><strong>{{ product.name }} | {{ product.price }}</strong></p>
-        {% if logged_in %}
-        <a href="#">Adicionar ao carrinho</a>
-        {% endif %}
       </div>
     {% endfor %}
   </div>
 </body>
-
-<script type="module" src="{{ constant('BASE_URL') }}assets/js/products.js"></script>
 
 </html>
