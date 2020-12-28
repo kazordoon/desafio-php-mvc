@@ -22,10 +22,7 @@ import UserValidator from './validators/UserValidator.js';
       errors.push('Preencha todos os campos.');
     }
 
-    const passwordsAreDifferent = !UserValidator.areThePasswordsTheSame(
-      password,
-      repeatedPassword
-    );
+    const passwordsAreDifferent = password !== repeatedPassword;
     if (passwordsAreDifferent) {
       errors.push('As senhas não coincidem.');
     }

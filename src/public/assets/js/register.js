@@ -33,10 +33,7 @@ import UserValidator from './validators/UserValidator.js';
       errors.push('A senha deve possuir entre 8 e 50 carácteres.');
     }
 
-    const passwordsAreDifferent = !UserValidator.areThePasswordsTheSame(
-      password,
-      repeatedPassword
-    );
+    const passwordsAreDifferent = password !== repeatedPassword;
     if (passwordsAreDifferent) {
       errors.push('As senhas não coincidem.');
     }
