@@ -3,7 +3,7 @@ FROM php:7.4-apache
 # Instalação da extensão pdo_mysql
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions pdo_mysql
+    install-php-extensions pdo_mysql intl
 
 # Instalação do Composer
 RUN  apt update && apt install git zip unzip -y
