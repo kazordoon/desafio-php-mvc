@@ -25,7 +25,7 @@ class CartController extends Controller {
 
 
   public function index() {
-    // TODO: Formatar preço ao listar produtos no carrinho
+    // TODO: Formatar preço ao listar produtos do carrinho
     $this->redirectIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];

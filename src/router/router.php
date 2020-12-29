@@ -7,6 +7,7 @@ $router = new Router(BASE_URL);
 $router->namespace('\App\Controllers');
 
 $router->get('/checkout', 'CheckOutController:index');
+$router->post('/checkout', 'CheckOutController:store');
 
 $router->get('/cart', 'CartController:index');
 $router->post('/cart', 'CartController:store');

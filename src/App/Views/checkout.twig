@@ -1,6 +1,10 @@
 {% extends "layouts/base.twig" %}
 
 {% block content %}
+{% if error_message %}
+<div class="alert alert-danger">{{ error_message }}</div>
+{% endif %}
+
 <div class="container center">
   <h1>{{ title }}</h1>
 
@@ -17,13 +21,35 @@
         <td>{{ product.name }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.quantity }}</td>
-        <td>{{ product.price }}</td>
+        <td>{{ product.price * product.quantity }}</td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
 
   <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
+  <form action="" method="POST" class="mt-10" name="form-checkout">
+    <div class="form-group">
+      <label for="creditCardOwner"></label>
+      <input type="text" name="creditCardOwner" id="creditCardOwner" placeholder="Nome no cartão" required />
+    </div>
+    <div class="form-group">
+      <label for="creditCardNumber"></label>
+      <input type="text" name="creditCardNumber" id="creditCardNumber" placeholder="Número do cartão de crédito" required />
+    </div>
+    <div class="form-group">
+      <label for="creditCardExpirationDate"></label>
+      <input type="text" name="creditCardExpirationDate" id="creditCardExpirationDate" placeholder="Data de expiração" required />
+    </div>
+    <div class="form-group">
+      <label for="creditCardCode"></label>
+      <input type="text" name="creditCardCode" id="creditCardCode" placeholder="Código de segurança" maxlength="3" width="3" required />
+    </div>
+
+    <button class="btn" type="submit">Finalizar</button>
+  </form>
 </div>
+
+<script type="module" src="{{ constant('BASE_URL') }}assets/js/checkout/index.js"></script>
 
 {% endblock %}

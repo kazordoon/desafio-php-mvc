@@ -7,6 +7,10 @@
   }
 </style>
 
+{% if success_message %}
+<div class="alert alert-success">{{ success_message }}</div>
+{% endif %}
+
 <div class="container">
   <h1 class="center">{{ title }}</h1>
 
