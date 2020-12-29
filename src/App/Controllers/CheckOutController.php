@@ -13,12 +13,22 @@ class CheckOutController extends Controller {
     }
   }
 
+  public function calculateTotalPrice($products = []) {
+    $totalPrice = 0;
+    foreach ($products as $product) {
+      $totalPrice += $product->price * $product->quantity;
+    }
+
+    return $totalPrice;
+  }
+
   public function index() {
     $this->redirectIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
-    $totalPrice = $cart['total_price'] ?? [];
+
+    $totalPrice = $this->calculateTotalPrice($products);
 
     $formattedTotalPrice = formatPrice($totalPrice);
 

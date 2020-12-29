@@ -20,7 +20,7 @@
         <td>{{ product.price }}</td>
         <td class="product-quantity">
           <button class="decrease">-</button>
-          <input class="quantity-input" type="number" value="1" min="1" max="{{ product.stock }}" readonly />
+          <input class="quantity-input" type="number" value="{{ product.quantity }}" min="1" max="{{ product.stock }}" readonly />
           <button class="increase">+</button>
         </td>
         <td class="product-total">{{ product.price }}</td>

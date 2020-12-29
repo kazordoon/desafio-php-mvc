@@ -14,6 +14,16 @@ class CartController extends Controller {
     }
   }
 
+  public function calculateTotalPrice($products = []) {
+    $totalPrice = 0;
+    foreach ($products as $product) {
+      $totalPrice += $product->price * $product->quantity;
+    }
+
+    return $totalPrice;
+  }
+
+
   public function index() {
     // TODO: Formatar preço ao listar produtos no carrinho
     $this->redirectIfNotLoggedIn();
@@ -21,10 +31,7 @@ class CartController extends Controller {
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
 
-    $totalPrice = 0;
-    foreach ($products as $product) {
-      $totalPrice += $product->price;
-    }
+    $totalPrice = $this->calculateTotalPrice($products);
 
     $_SESSION['cart']['total_price'] = $totalPrice;
 
@@ -51,6 +58,7 @@ class CartController extends Controller {
     foreach ($productIds as $productId) {
       $product = Product::findById($productId);
       $products[$productId] = $product;
+      $products[$productId]->quantity = 1;
     }
 
     $_SESSION['cart']['products'] = $products;
