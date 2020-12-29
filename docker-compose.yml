@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    container_name: php_login_web
+    container_name: mvc_web
     ports:
       - '8080:80'
     volumes:
@@ -16,7 +16,7 @@ services:
         ipv4_address: 18.0.5.2
   db:
     image: mariadb
-    container_name: php_login_db
+    container_name: mvc_db
     environment:
       MYSQL_ROOT_PASSWORD: toor
     ports:

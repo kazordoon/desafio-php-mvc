@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker container exec -i php_login_web composer install
+docker container exec -i mvc_web composer install

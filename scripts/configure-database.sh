@@ -1,2 +1,2 @@
 #!/bin/bash
-docker container exec -i php_login_db mysql -uroot -ptoor < db/dump.sql
+docker container exec -i mvc_db mysql -uroot -ptoor < db/dump.sql
