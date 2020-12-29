@@ -17,7 +17,9 @@
 
 <body>
   <div class="container products-container">
+    {% if logged_in %}
     <a id="go-to-cart" href="#">Ir para o carrinho</a>
+    {% endif %}
     {% for product in products %}
       <div class="product" data-id="{{ product.id }}">
         <img src="{{ product.image_url }}" alt="{{ product.name }}" />
