@@ -8,6 +8,7 @@ $router->namespace('\App\Controllers');
 
 $router->get('/cart', 'CartController:index');
 $router->post('/cart', 'CartController:store');
+$router->delete('/cart/{id}', 'CartController:destroy');
 
 $router->get('/products', 'ProductsController:index');
 

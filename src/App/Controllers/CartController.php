@@ -15,12 +15,22 @@ class CartController extends Controller {
   }
 
   public function index() {
+    // TODO: Formatar preço ao listar produtos no carrinho
     $this->redirectIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
 
-    $data = ['products' => $products];
+    $totalPrice = 0;
+    foreach ($products as $product) {
+      $totalPrice += $product->price;
+    }
+
+    $_SESSION['cart']['total_price'] = $totalPrice;
+
+    $formattedTotalPrice = formatPrice($totalPrice);
+
+    $data = ['products' => $products, 'total_price' => $formattedTotalPrice];
 
     $this->render('cart', $data);
   }
@@ -41,5 +51,22 @@ class CartController extends Controller {
 
     $_SESSION['cart']['products'] = $products;
     exit(json_encode($products));
+  }
+
+  public function destroy($params) {
+    $cart = $_SESSION['cart'] ?? [];
+    $products = $cart['products'] ?? [];
+    $productId = $params['id'];
+
+    $productIsNotOnTheCart = !isset($products[$productId]);
+    if ($productIsNotOnTheCart) {
+      return;
+    }
+
+    $filteredProducts = array_filter($products, function($product) use ($productId) {
+      return $product->id !== $productId;
+    });
+
+    $_SESSION['cart']['products'] = $filteredProducts;
   }
 }

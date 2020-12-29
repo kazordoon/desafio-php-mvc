@@ -6,17 +6,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carrinho</title>
   <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
+  <style>
+    table {
+      width: 100%;
+    }
+  </style>
 </head>
 
 <body>
   <div class="container center">
-    {% for product in products %}
-      <div class="product" data-id="{{ product.id }}">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}" />
-        <p><strong>{{ product.name }} | {{ product.price }}</strong></p>
-      </div>
-    {% endfor %}
+    <table>
+      <thead>
+        <th>Imagem</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Quantidade</th>
+      </thead>
+      <tbody>
+        {% for product in products %}
+        <tr class="product" data-id="{{ product.id }}">
+          <td><img src="{{ product.image_url }}" alt="{{ product.name }}" /></td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }}</td>
+          <td>
+            <button class="decrease">-</button>
+            <input type="number" value="1" min="1" max="{{ product.stock }}" readonly />
+            <button class="increase">+</button>
+          </td>
+          <th><button class="btn btn-danger delete">Excluir</button></th>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
   </div>
 </body>
+
+<script type="module" src="{{ constant('BASE_URL') }}assets/js/cart.js"></script>
 
 </html>
