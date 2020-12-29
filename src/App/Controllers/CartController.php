@@ -54,6 +54,8 @@ class CartController extends Controller {
   }
 
   public function destroy($params) {
+    $this->redirectIfNotLoggedIn();
+
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
     $productId = $params['id'];
@@ -68,5 +70,23 @@ class CartController extends Controller {
     });
 
     $_SESSION['cart']['products'] = $filteredProducts;
+  }
+
+  public function addProductQuantity() {
+    $this->redirectIfNotLoggedIn();
+
+    $cart = $_SESSION['cart'] ?? [];
+    $products = $cart['products'] ?? [];
+
+    // id=quantidade;id=quantidade
+    $productsQuantities = filter_input(INPUT_POST, 'products');
+    $productsQuantities = explode(';', $productsQuantities);
+
+    foreach ($productsQuantities as $product) {
+      [$id, $quantity] = explode('=', $product);
+      $products[$id]->quantity = $quantity;
+    }
+
+    $_SESSION['cart']['products'] = $products;
   }
 }

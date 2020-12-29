@@ -9,6 +9,7 @@ $router->namespace('\App\Controllers');
 $router->get('/cart', 'CartController:index');
 $router->post('/cart', 'CartController:store');
 $router->delete('/cart/{id}', 'CartController:destroy');
+$router->post('/cart/add_quantity', 'CartController:addProductQuantity');
 
 $router->get('/products', 'ProductsController:index');
 
