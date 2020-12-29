@@ -21,6 +21,7 @@
         <th>Nome</th>
         <th>Preço</th>
         <th>Quantidade</th>
+        <th>Total</th>
       </thead>
       <tbody>
         {% for product in products %}
@@ -30,9 +31,10 @@
           <td>{{ product.price }}</td>
           <td>
             <button class="decrease">-</button>
-            <input type="number" value="1" min="1" max="{{ product.stock }}" readonly />
+            <input type="number" value="1" min="1" max="{{ product.stock }}" name="price" readonly />
             <button class="increase">+</button>
           </td>
+          <td class="product-total">{{ product.price }}</td>
           <th><button class="btn btn-danger delete">Excluir</button></th>
         </tr>
       {% endfor %}
@@ -43,6 +45,6 @@
   </div>
 </body>
 
-<script type="module" src="{{ constant('BASE_URL') }}assets/js/cart.js"></script>
+<script type="module" src="{{ constant('BASE_URL') }}assets/js/cart/index.js"></script>
 
 </html>
