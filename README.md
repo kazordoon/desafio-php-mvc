@@ -55,3 +55,6 @@ Após instalar estas extensões de acordo com seu sistema operacional, siga as s
 
 ## Autores
 - **Felipe Barros** - [kazordoon](https://github.com/kazordoon)
+
+## Licença
+Este projeto está licenciado sob a licença MIT - Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
