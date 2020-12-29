@@ -1,44 +1,36 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layouts/base.twig" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Painel do usuário</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-</head>
+{% block content %}
+<div class="container center">
+  <h1>{{ title }}</h1>
 
-<body>
-  <div class="container center">
-    <form method="POST" action="" name="form-account">
-      <div class="form-group">
-        <label for="name"></label>
-        <input type="name" name="name" id="name" aria-label="name" placeholder="Nome" maxlength="255" required
-          value="{{ user.name }}" readonly />
-        <a id="change-name" href="{{ constant('BASE_URL') }}account/change_name"><small>Alterar nome</small></a>
-      </div>
-      <div class="form-group">
-        <label for="email"></label>
-        {% if user.verified %}
-        <p class="highlight-success">E-mail verificado.</p>
-        {% else %}
-        <p class="highlight-danger">E-mail não verificado.</p>
-        {% endif %}
-        <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255" required
-          value="{{ user.email }}" readonly />
-        <a id="change-email" href="{{ constant('BASE_URL') }}account/change_email"><small>Alterar e-mail</small></a>
-      </div>
-      <div class="form-group">
-        <label for="password"></label>
-        <input type="password" name="password" id="password" aria-label="password" placeholder="Senha" minlength="8"
-          maxlength="50" required value="********" readonly />
-        <a id="change-password" href="{{ constant('BASE_URL') }}account/change_password"><small>Alterar
-            senha</small></a>
-      </div>
-      <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
-    </form>
-    <a href="{{ constant('BASE_URL') }}logout"><button class="btn">Sair</button></a>
-  </div>
-</body>
-
-</html>
+  <form method="POST" action="" name="form-account">
+    <div class="form-group">
+      <label for="name"></label>
+      <input type="name" name="name" id="name" aria-label="name" placeholder="Nome" maxlength="255" required
+        value="{{ user.name }}" readonly />
+      <a id="change-name" href="{{ constant('BASE_URL') }}account/change_name"><small>Alterar nome</small></a>
+    </div>
+    <div class="form-group">
+      <label for="email"></label>
+      {% if user.verified %}
+      <p class="highlight-success">E-mail verificado.</p>
+      {% else %}
+      <p class="highlight-danger">E-mail não verificado.</p>
+      {% endif %}
+      <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255" required
+        value="{{ user.email }}" readonly />
+      <a id="change-email" href="{{ constant('BASE_URL') }}account/change_email"><small>Alterar e-mail</small></a>
+    </div>
+    <div class="form-group">
+      <label for="password"></label>
+      <input type="password" name="password" id="password" aria-label="password" placeholder="Senha" minlength="8"
+        maxlength="50" required value="********" readonly />
+      <a id="change-password" href="{{ constant('BASE_URL') }}account/change_password"><small>Alterar
+          senha</small></a>
+    </div>
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
+  </form>
+  <a href="{{ constant('BASE_URL') }}logout"><button class="btn">Sair</button></a>
+</div>
+{% endblock %}

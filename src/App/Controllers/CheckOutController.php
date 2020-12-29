@@ -22,7 +22,11 @@ class CheckOutController extends Controller {
 
     $formattedTotalPrice = formatPrice($totalPrice);
 
-    $data = ['products' => $products, 'total_price' => $formattedTotalPrice];
+    $data = [
+      'title' => 'Checkout',
+      'products' => $products,
+      'total_price' => $formattedTotalPrice
+    ];
 
     $this->render('checkout', $data);
   }

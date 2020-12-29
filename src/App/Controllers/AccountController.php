@@ -24,6 +24,7 @@ class AccountController extends Controller {
     $user = User::findById($userId);
 
     $data = [
+      'title' => 'Painel do usuário',
       'user' => [
         'id' => $user->id,
         'name' => $user->name,
@@ -46,6 +47,7 @@ class AccountController extends Controller {
     $user = User::findById($userId);
 
     $data = [
+      'title' => 'Alteração do nome',
       'name' => $user->name,
       'error_message' => $errorMessage,
       'csrf_token' => $csrfToken
@@ -93,6 +95,7 @@ class AccountController extends Controller {
     $user = User::findById($userId);
 
     $data = [
+      'title' => 'Alteração do e-mail',
       'email' => $user->email,
       'error_message' => $errorMessage,
       'csrf_token' => $csrfToken
@@ -146,6 +149,7 @@ class AccountController extends Controller {
     $_SESSION['csrf_token'] = $csrfToken;
 
     $data = [
+      'title' => 'Alteração da senha',
       'error_message' => $errorMessage,
       'csrf_token' => $csrfToken
     ];

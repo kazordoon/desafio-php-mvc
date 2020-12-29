@@ -1,51 +1,39 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layouts/base.twig" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Carrinho</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-  <style>
-    table {
-      width: 100%;
-    }
-  </style>
-</head>
+{% block content %}
+<div class="container center">
+  <h1>{{ title }}</h1>
 
-<body>
-  <div class="container center">
-    <table>
-      <thead>
-        <th>Imagem</th>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Quantidade</th>
-        <th>Total</th>
-      </thead>
-      <tbody>
-        {% for product in products %}
-        <tr class="product" data-id="{{ product.id }}">
-          <td><img src="{{ product.image_url }}" alt="{{ product.name }}" /></td>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td class="product-quantity">
-            <button class="decrease">-</button>
-            <input class="quantity-input" type="number" value="1" min="1" max="{{ product.stock }}" readonly />
-            <button class="increase">+</button>
-          </td>
-          <td class="product-total">{{ product.price }}</td>
-          <th><button class="btn btn-danger delete">Excluir</button></th>
-        </tr>
+  <table>
+    <thead>
+      <th>Imagem</th>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Total</th>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr class="product" data-id="{{ product.id }}">
+        <td><img src="{{ product.image_url }}" alt="{{ product.name }}" /></td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td class="product-quantity">
+          <button class="decrease">-</button>
+          <input class="quantity-input" type="number" value="1" min="1" max="{{ product.stock }}" readonly />
+          <button class="increase">+</button>
+        </td>
+        <td class="product-total">{{ product.price }}</td>
+        <th><button class="btn btn-danger delete">Excluir</button></th>
+      </tr>
       {% endfor %}
-      </tbody>
-    </table>
+    </tbody>
+  </table>
 
-    <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
-    <button id="go-to-checkout" class="btn">Finalizar</button>
-  </div>
-</body>
+  <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
+  <button id="go-to-checkout" class="btn">Finalizar</button>
+</div>
 
 <script type="module" src="{{ constant('BASE_URL') }}assets/js/cart/index.js"></script>
 
-</html>
+{% endblock %}

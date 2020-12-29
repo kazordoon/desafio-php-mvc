@@ -1,41 +1,31 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layouts/base.twig" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-</head>
+{% block content %}
+{% if error_message %}
+<div class="alert alert-danger">{{ error_message }}</div>
+{% elseif success_message %}
+<div class="alert alert-success">{{ success_message }}</div>
+{% endif %}
 
-<body>
+<div class="container center">
+  <h1>{{ title }}</h1>
+  <form method="POST" action="" name="form-login">
+    <div class="form-group">
+      <label for="email"></label>
+      <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255" required />
+    </div>
+    <div class="form-group">
+      <label for="password"></label>
+      <input type="password" name="password" id="password" aria-label="password" placeholder="Senha" maxlength="50"
+        required />
+    </div>
 
-  {% if error_message %}
-  <div class="alert alert-danger">{{ error_message }}</div>
-  {% elseif success_message %}
-  <div class="alert alert-success">{{ success_message }}</div>
-  {% endif %}
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
+    <button class="btn" type="submit" name="btn-login">Entrar</button>
+    <p><small>Não possui uma conta ? <a href="{{ constant('BASE_URL') }}register">Crie uma agora.</a></small></p>
+    <p><small>Esqueceu a sua senha ? <a href="{{ constant('BASE_URL') }}recover_password">Recupere aqui.</a></small></p>
+  </form>
+</div>
 
-  <div class="container center">
-    <h1 class="title">Login</h1>
-    <form method="POST" action="" name="form-login">
-      <div class="form-group">
-        <label for="email"></label>
-        <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255" required />
-      </div>
-      <div class="form-group">
-        <label for="password"></label>
-        <input type="password" name="password" id="password" aria-label="password" placeholder="Senha" maxlength="50" required />
-      </div>
-
-      <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
-      <button class="btn" type="submit" name="btn-login">Entrar</button>
-      <p><small>Não possui uma conta ? <a href="{{ constant('BASE_URL') }}register">Crie uma agora.</a></small></p>
-      <p><small>Esqueceu a sua senha ? <a href="{{ constant('BASE_URL') }}recover_password">Recupere aqui.</a></small></p>
-    </form>
-  </div>
-
-  <script type="module" src="{{ constant('BASE_URL') }}assets/js/login/index.js"></script>
-</body>
-
-</html>
+<script type="module" src="{{ constant('BASE_URL') }}assets/js/login/index.js"></script>
+{% endblock %}

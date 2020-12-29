@@ -30,7 +30,11 @@ class CartController extends Controller {
 
     $formattedTotalPrice = formatPrice($totalPrice);
 
-    $data = ['products' => $products, 'total_price' => $formattedTotalPrice];
+    $data = [
+      'title' => 'Carrinho',
+      'products' => $products,
+      'total_price' => $formattedTotalPrice
+    ];
 
     $this->render('cart', $data);
   }
@@ -65,7 +69,7 @@ class CartController extends Controller {
       return;
     }
 
-    $filteredProducts = array_filter($products, function($product) use ($productId) {
+    $filteredProducts = array_filter($products, function ($product) use ($productId) {
       return $product->id !== $productId;
     });
 

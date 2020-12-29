@@ -25,6 +25,7 @@ class RegistrationController extends Controller {
     $_SESSION['csrf_token'] = $csrfToken;
 
     $data = [
+      'title' => 'Cadastro',
       'error_message' => $errorMessage,
       'csrf_token' => $csrfToken
     ];
@@ -36,7 +37,7 @@ class RegistrationController extends Controller {
 
   public function store() {
     $this->redirectIfLoggedIn();
-    
+
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
       $name = filter_input(INPUT_POST, 'name');

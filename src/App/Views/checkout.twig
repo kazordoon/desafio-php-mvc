@@ -1,41 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layouts/base.twig" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Checkout</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-  <style>
-    table {
-      width: 100%;
-    }
-  </style>
-</head>
+{% block content %}
+<div class="container center">
+  <h1>{{ title }}</h1>
 
-<body>
-  <div class="container center">
-    <table>
-      <thead>
-        <th>Nome</th>
-        <th>Preço</th>
-        <th>Quantidade</th>
-        <th>Total</th>
-      </thead>
-      <tbody>
-        {% for product in products %}
-        <tr>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.quantity }}</td>
-          <td>{{ product.price }}</td>
-        </tr>
+  <table>
+    <thead>
+      <th>Nome</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Total</th>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.price }}</td>
+      </tr>
       {% endfor %}
-      </tbody>
-    </table>
+    </tbody>
+  </table>
 
-    <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
-  </div>
-</body>
+  <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
+</div>
 
-</html>
+{% endblock %}

@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Verificação de e-mail</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-  <style>
-    .mt-10 {
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-	<div class="container center">
-    <h1 class="title">Verificação de e-mail</h1>
-    <hr />
-    <h3 class="mt-10">Verifique o e-mail de confirmação na caixa de entrada do seu e-mail: {{ email }}</h3>
-    <p class="mt-10">Se você não receber o e-mail de confirmação em alguns minutos:</p>
-    <ul>
-      <li>Verifique a caixa de spam.</li>
-      <li>Verifique se você digitou seu e-mail corretamente.</li>
-      <li><a href="">Clique aqui</a> para enviar outro e-mail de confirmação.</li>
-    </ul>
-	</div>
-</body>
-</html>
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+<div class="container center">
+  <h1>{{ title }}</h1>
+  <hr />
+  <h3 class="mt-10">Verifique o e-mail de confirmação na caixa de entrada do seu e-mail: {{ email }}</h3>
+  <p class="mt-10">Se você não receber o e-mail de confirmação em alguns minutos:</p>
+  <ul>
+    <li>Verifique a caixa de spam.</li>
+    <li>Verifique se você digitou seu e-mail corretamente.</li>
+    <li><a href="">Clique aqui</a> para enviar outro e-mail de confirmação.</li>
+  </ul>
+</div>
+{% endblock %}

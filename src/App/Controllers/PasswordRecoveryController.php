@@ -29,6 +29,7 @@ class PasswordRecoveryController extends Controller {
     $_SESSION['csrf_token'] = $csrfToken;
 
     $data = [
+      'title' => 'Recuperação de senha',
       'error_message' => $errorMessage,
       'success_message' => $successMessage,
       'csrf_token' => $csrfToken

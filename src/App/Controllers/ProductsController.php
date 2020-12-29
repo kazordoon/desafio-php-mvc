@@ -16,6 +16,7 @@ class ProductsController extends Controller {
 
     $isTheUserLoggedIn = isset($_SESSION['user_id']);
     $data = [
+      'title' => 'Produtos',
       'cart' => $cart,
       'products' => $products,
       'logged_in' => $isTheUserLoggedIn

@@ -43,6 +43,7 @@ class PasswordResetController extends Controller {
     $_SESSION['csrf_token'] = $csrfToken;
 
     $data = [
+      'title' => 'Alteração de senha',
       'error_message' => $errorMessage,
       'csrf_token' => $csrfToken
     ];

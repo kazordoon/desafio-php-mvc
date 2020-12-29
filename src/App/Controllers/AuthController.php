@@ -25,6 +25,7 @@ class AuthController extends Controller {
     $_SESSION['csrf_token'] = $csrfToken;
 
     $data = [
+      'title' => 'Login',
       'success_message' => $successMessage,
       'error_message' => $errorMessage,
       'csrf_token' => $csrfToken

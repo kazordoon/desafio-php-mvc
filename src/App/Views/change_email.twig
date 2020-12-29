@@ -1,35 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layouts/base.twig" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Alteração de email</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-</head>
+{% block content %}
+{% if error_message %}
+<div class="alert alert-danger">{{ error_message }}</div>
+{% endif %}
 
-<body>
+<div class="container center">
+  <h1>{{ title }}</h1>
+  <form method="POST" action="" name="form-email">
+    <div class="form-group">
+      <label for="email"></label>
+      <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255"
+        value="{{ email }}" required />
+    </div>
 
-  {% if error_message %}
-  <div class="alert alert-danger">{{ error_message }}</div>
-  {% endif %}
-
-  <div class="container center">
-    <h1 class="title">Alteração de email</h1>
-    <form method="POST" action="" name="form-email">
-      <div class="form-group">
-        <label for="email"></label>
-        <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255"
-          value="{{ email }}" required />
-      </div>
-
-      <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
-      <button class="btn" type="submit" name="btn-recover">Alterar</button>
-    </form>
-  </div>
-</body>
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}" required />
+    <button class="btn" type="submit" name="btn-recover">Alterar</button>
+  </form>
+</div>
 
 <script type="module" src="{{ constant('BASE_URL') }}assets/js/changeEmail/index.js"></script>
-
-</html>
+{% endblock %}

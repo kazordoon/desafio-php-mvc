@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 * {
   margin: 0;
@@ -34,12 +34,15 @@ a:hover {
 }
 
 table {
+  width: 100%;
   border-collapse: collapse;
   max-height: 500px;
   text-align: center;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #000;
   padding: 5px;
 }
@@ -49,8 +52,17 @@ table img {
   height: 100px;
 }
 
-table input[type=number] {
+table input[type="number"] {
   width: 80px;
+}
+
+h1 {
+  font-size: 2.1rem;
+  margin-bottom: 0.7rem;
+}
+
+.mt-10 {
+  margin-top: 10px;
 }
 
 .highlight-success {
@@ -65,11 +77,6 @@ table input[type=number] {
   width: 90vw;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-.title {
-  font-size: 2.1rem;
-  margin-bottom: 0.7rem;
 }
 
 .btn {
@@ -94,7 +101,7 @@ table input[type=number] {
 
 .btn-danger {
   background-color: #dc3545;
-  border-color: #dc3545
+  border-color: #dc3545;
 }
 
 .btn-danger:hover {
@@ -142,4 +149,10 @@ table input[type=number] {
   justify-content: center;
   align-items: center;
   margin-top: 1rem;
+}
+
+.products-container {
+  display: flex;
+
+  justify-content: space-evenly;
 }

@@ -1,41 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "layouts/base.twig" %}
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Produtos</title>
-  <link rel="stylesheet" href="{{ constant('BASE_URL') }}assets/css/styles.css" />
-  <style>
-    .products-container {
-      display: flex;
+{% block content %}
+<style>
+  #go-to-cart {
+    font-size: 1.5rem;
+  }
+</style>
 
-      justify-content: space-evenly;
-    }
-  </style>
-</head>
+<div class="container">
+  <h1 class="center">{{ title }}</h1>
 
-<body>
-  <div class="container products-container">
-    {% if logged_in %}
-    <a id="go-to-cart" href="#">Ir para o carrinho</a>
-    {% endif %}
+  {% if logged_in %}
+  <a id="go-to-cart" href="#">Ir para o carrinho</a>
+  {% endif %}
+  <div class="products-container mt-10">
     {% for product in products %}
-      <div class="product" data-id="{{ product.id }}">
-        <img src="{{ product.image_url }}" alt="{{ product.name }}" />
-        <p><strong>{{ product.name }} | {{ product.price }}</strong></p>
-        {% if logged_in %}
-          {%if cart['products'][product.id] %}
-          <p class="highlight-success">Adicionado</p>
-          {% else %}
-          <a href="#">Adicionar ao carrinho</a>
-          {% endif %}
+    <div class="product" data-id="{{ product.id }}">
+      <img src="{{ product.image_url }}" alt="{{ product.name }}" />
+      <p><strong>{{ product.name }} | {{ product.price }}</strong></p>
+      {% if logged_in %}
+        {% if cart['products'][product.id] %}
+        <p class="highlight-success">Adicionado</p>
+        {% else %}
+        <a href="#">Adicionar ao carrinho</a>
         {% endif %}
-      </div>
+      {% endif %}
+    </div>
     {% endfor %}
   </div>
-</body>
+</div>
 
 <script type="module" src="{{ constant('BASE_URL') }}assets/js/products/index.js"></script>
-
-</html>
+{% endblock %}

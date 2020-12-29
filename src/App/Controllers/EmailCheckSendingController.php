@@ -44,6 +44,7 @@ class EmailCheckSendingController extends Controller {
     }
 
     $data = [
+      'title' => 'Verificação de email',
       'email' => $email
     ];
     $this->render('send_verification_email', $data);
