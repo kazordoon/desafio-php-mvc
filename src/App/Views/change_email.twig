@@ -20,7 +20,7 @@
     <form method="POST" action="" name="form-email">
       <div class="form-group">
         <label for="email"></label>
-        <input type="text" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255"
+        <input type="email" name="email" id="email" aria-label="email" placeholder="E-mail" maxlength="255"
           value="{{ email }}" required />
       </div>
 
@@ -30,6 +30,6 @@
   </div>
 </body>
 
-<script type="module" src="{{ constant('BASE_URL') }}assets/js/changeEmail.js"></script>
+<script type="module" src="{{ constant('BASE_URL') }}assets/js/changeEmail/index.js"></script>
 
 </html>
