@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container center">
   <h1>{{ title }}</h1>
+  <small>Os preços estarão com problema nesta página, porém na página de checkout estará correto, corrigirei isto em breve.</small>
 
   <table>
     <thead>
@@ -31,7 +32,7 @@
   </table>
 
   <p>Valor total: <strong><span id="total-price">{{ total_price }}</span></strong></p>
-  <button id="go-to-checkout" class="btn">Finalizar</button>
+  <button id="go-to-checkout" class="btn">Ir para o checkout</button>
 </div>
 
 <script type="module" src="{{ constant('BASE_URL') }}assets/js/cart/index.js"></script>
