@@ -6,6 +6,8 @@ $router = new Router(BASE_URL);
 
 $router->namespace('\App\Controllers');
 
+$router->get('/checkout', 'CheckOutController:index');
+
 $router->get('/cart', 'CartController:index');
 $router->post('/cart', 'CartController:store');
 $router->delete('/cart/{id}', 'CartController:destroy');
