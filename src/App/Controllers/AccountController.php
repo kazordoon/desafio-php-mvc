@@ -9,16 +9,8 @@ use App\Models\User;
 use App\Validators\UserValidator;
 
 class AccountController extends Controller {
-  public function redirectIfNotLoggedIn() {
-    $isNotLoggedIn = !isset($_SESSION['user_id']);
-
-    if ($isNotLoggedIn) {
-      redirectTo(BASE_URL . 'login');
-    }
-  }
-
   public function index() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $userId = $_SESSION['user_id'] ?? null;
     $user = User::findById($userId);
@@ -36,7 +28,7 @@ class AccountController extends Controller {
   }
 
   public function editName() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
@@ -59,7 +51,7 @@ class AccountController extends Controller {
   }
 
   public function updateName() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
@@ -84,7 +76,7 @@ class AccountController extends Controller {
   }
 
   public function editEmail() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
@@ -107,7 +99,7 @@ class AccountController extends Controller {
   }
 
   public function updateEmail() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
@@ -141,7 +133,7 @@ class AccountController extends Controller {
   }
 
   public function editPassword() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
@@ -160,7 +152,7 @@ class AccountController extends Controller {
   }
 
   public function updatePassword() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {

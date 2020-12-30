@@ -20,4 +20,19 @@ abstract class Controller {
       exit('Page not found.');
     }
   }
+
+  public function redirectToLoginPageIfNotLoggedIn() {
+    $isNotLoggedIn = !isset($_SESSION['user_id']);
+
+    if ($isNotLoggedIn) {
+      redirectTo(BASE_URL . 'login');
+    }
+  }
+
+  public function redirectToAccountPageIfLoggedIn() {
+    $isTheUserLoggedIn = isset($_SESSION['user_id']);
+    if ($isTheUserLoggedIn) {
+      redirectTo(BASE_URL . 'account');
+    }
+  }
 }

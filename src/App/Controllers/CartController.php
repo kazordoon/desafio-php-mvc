@@ -4,17 +4,8 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\Product;
-use stdclass;
 
 class CartController extends Controller {
-  public function redirectIfNotLoggedIn() {
-    $isNotLoggedIn = !isset($_SESSION['user_id']);
-
-    if ($isNotLoggedIn) {
-      redirectTo(BASE_URL . 'login');
-    }
-  }
-
   public function calculateTotalPrice($products = []) {
     $totalPrice = 0;
     foreach ($products as $product) {
@@ -26,7 +17,7 @@ class CartController extends Controller {
 
 
   public function index() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
@@ -57,7 +48,7 @@ class CartController extends Controller {
   }
 
   public function store() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
@@ -76,7 +67,7 @@ class CartController extends Controller {
   }
 
   public function destroy($params) {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
@@ -95,7 +86,7 @@ class CartController extends Controller {
   }
 
   public function addProductQuantity() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];

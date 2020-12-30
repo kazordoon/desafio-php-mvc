@@ -9,15 +9,8 @@ use App\Models\User;
 use App\Validators\UserValidator;
 
 class RegistrationController extends Controller {
-  public function redirectIfLoggedIn() {
-    $isTheUserLoggedIn = isset($_SESSION['user_id']);
-    if ($isTheUserLoggedIn) {
-      redirectTo(BASE_URL . 'account');
-    }
-  }
-
   public function index() {
-    $this->redirectIfLoggedIn();
+    $this->redirectToAccountPageIfLoggedIn();
 
     $errorMessage = $_SESSION['error_message'] ?? null;
 
@@ -36,7 +29,7 @@ class RegistrationController extends Controller {
   }
 
   public function store() {
-    $this->redirectIfLoggedIn();
+    $this->redirectToAccountPageIfLoggedIn();
 
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {

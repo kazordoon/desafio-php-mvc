@@ -10,14 +10,6 @@ use App\Models\Purchase;
 use App\Validators\CreditCardValidator;
 
 class CheckOutController extends Controller {
-  public function redirectIfNotLoggedIn() {
-    $isNotLoggedIn = !isset($_SESSION['user_id']);
-
-    if ($isNotLoggedIn) {
-      redirectTo(BASE_URL . 'login');
-    }
-  }
-
   public function calculateTotalPrice($products = []) {
     $totalPrice = 0;
     foreach ($products as $product) {
@@ -28,7 +20,7 @@ class CheckOutController extends Controller {
   }
 
   public function index() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
@@ -63,7 +55,7 @@ class CheckOutController extends Controller {
   }
 
   public function store() {
-    $this->redirectIfNotLoggedIn();
+    $this->redirectToLoginPageIfNotLoggedIn();
 
     $creditCardOwner = filter_input(INPUT_POST, 'creditCardOwner');
     $creditCardNumber = filter_input(INPUT_POST, 'creditCardNumber');

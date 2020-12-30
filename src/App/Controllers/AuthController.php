@@ -8,15 +8,8 @@ use App\Errors\ValidationErrors;
 use App\Models\User;
 
 class AuthController extends Controller {
-  public function redirectIfLoggedIn() {
-    $isTheUserLoggedIn = isset($_SESSION['user_id']);
-    if ($isTheUserLoggedIn) {
-      redirectTo(BASE_URL . 'account');
-    }
-  }
-
   public function index() {
-    $this->redirectIfLoggedIn();
+    $this->redirectToAccountPageIfLoggedIn();
 
     $successMessage = $_SESSION['success_message'] ?? null;
     $errorMessage = $_SESSION['error_message'] ?? null;
@@ -37,7 +30,7 @@ class AuthController extends Controller {
   }
 
   public function auth() {
-    $this->redirectIfLoggedIn();
+    $this->redirectToAccountPageIfLoggedIn();
 
     $isAValidCSRFToken = $_POST['_csrf'] === $_SESSION['csrf_token'];
     if ($isAValidCSRFToken) {
