@@ -17,7 +17,8 @@
       "utils/clearSessionMessages.php",
       "utils/generateToken.php",
       "utils/sendEmailVerificationLink.php",
-      "utils/formatPrice.php"
+      "utils/formatPrice.php",
+      "utils/cloneClass.php"
     ]
   },
   "require": {
