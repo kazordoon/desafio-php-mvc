@@ -3,12 +3,13 @@ import formatPrice from '../utils/formatPrice.js';
 import showUpdatedTotalPrice from './showUpdatedTotalPrice.js';
 
 export default function decreaseProductQuantity(event) {
-  const productTotalPriceElement = event.target.parentElement.nextElementSibling;
+  const productTotalPriceElement =
+    event.target.parentElement.nextElementSibling;
   const productPriceElement = event.target.parentElement.previousElementSibling;
   const productQuantitiesElement = event.target.nextElementSibling;
 
   const productQuantities = parseInt(productQuantitiesElement.value, 10);
-  const productPrice = parseFloat(productPriceElement.textContent);
+  const productPrice = convertCurrencyToNumber(productPriceElement.textContent);
   const decreasedValue = productQuantities - 1;
 
   const minQuantity = productQuantitiesElement.getAttribute('min');
@@ -16,7 +17,9 @@ export default function decreaseProductQuantity(event) {
     return;
   }
 
-  let productTotalPrice = convertCurrencyToNumber(productTotalPriceElement.textContent);
+  let productTotalPrice = convertCurrencyToNumber(
+    productTotalPriceElement.textContent
+  );
   productTotalPrice -= productPrice;
   productTotalPrice = formatPrice(productTotalPrice);
 

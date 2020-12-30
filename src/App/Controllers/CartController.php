@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\Product;
+use stdclass;
 
 class CartController extends Controller {
   public function redirectIfNotLoggedIn() {
@@ -25,21 +26,30 @@ class CartController extends Controller {
 
 
   public function index() {
-    // TODO: Formatar preço ao listar produtos do carrinho
     $this->redirectIfNotLoggedIn();
 
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
 
+    $productsCopy = [];
+    foreach ($products as $product) {
+      $productsCopy[] = cloneClass($product);
+    }
+
+    foreach ($productsCopy as $product) {
+      $product->total = formatPrice(
+        $product->price * $product->quantity
+      );
+      $product->price = formatPrice($product->price);
+    }
+
     $totalPrice = $this->calculateTotalPrice($products);
-
     $_SESSION['cart']['total_price'] = $totalPrice;
-
     $formattedTotalPrice = formatPrice($totalPrice);
 
     $data = [
       'title' => 'Carrinho',
-      'products' => $products,
+      'products' => $productsCopy,
       'total_price' => $formattedTotalPrice
     ];
 

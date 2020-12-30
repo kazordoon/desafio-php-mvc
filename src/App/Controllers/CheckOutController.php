@@ -33,6 +33,18 @@ class CheckOutController extends Controller {
     $cart = $_SESSION['cart'] ?? [];
     $products = $cart['products'] ?? [];
 
+    $productsCopy = [];
+    foreach ($products as $product) {
+      $productsCopy[] = cloneClass($product);
+    }
+
+    foreach ($productsCopy as $product) {
+      $product->total = formatPrice(
+        $product->price * $product->quantity
+      );
+      $product->price = formatPrice($product->price);
+    }
+
     $totalPrice = $this->calculateTotalPrice($products);
     $formattedTotalPrice = formatPrice($totalPrice);
 
@@ -40,7 +52,7 @@ class CheckOutController extends Controller {
 
     $data = [
       'title' => 'Checkout',
-      'products' => $products,
+      'products' => $productsCopy,
       'total_price' => $formattedTotalPrice,
       'error_message' => $errorMessage
     ];
