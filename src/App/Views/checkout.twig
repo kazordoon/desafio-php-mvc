@@ -46,6 +46,8 @@
       <input type="text" name="creditCardCode" id="creditCardCode" placeholder="Código de segurança" maxlength="3" width="3" required />
     </div>
 
+    <input type="hidden" name="_csrf" value="{{ csrf_token }}">
+
     <button class="btn" type="submit">Finalizar</button>
   </form>
 </div>
