@@ -66,7 +66,7 @@ class PasswordRecoveryController extends Controller {
 
       User::findByIdAndUpdate($user->id, [
         'password_recovery_token' => $passwordRecoveryToken,
-        'password_token_expiration_time' => $passwordTokenExpirationTime
+        'password_token_expiration_date' => $passwordTokenExpirationTime
       ]);
 
       $passwordRecoveryLink = BASE_URL . "reset_password?email={$email}&token={$passwordRecoveryToken}";

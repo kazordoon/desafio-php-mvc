@@ -31,7 +31,7 @@ class PasswordResetController extends Controller {
     }
 
     $now = date('Y-m-d H:i:s', time());
-    $passwordRecoveryTokenHasExpired = $user->password_token_expiration_time < $now;
+    $passwordRecoveryTokenHasExpired = $user->password_token_expiration_date < $now;
     if ($passwordRecoveryTokenHasExpired) {
       $_SESSION['error_message'] = TokenErrors::EXPIRED_TOKEN;
       redirectTo(BASE_URL . 'recover_password');
@@ -80,7 +80,7 @@ class PasswordResetController extends Controller {
 
       User::findByIdAndUpdate($userId, [
         'password_recovery_token' => null,
-        'password_token_expiration_time' => null
+        'password_token_expiration_date' => null
       ]);
 
       unset($_SESSION['user_id']);
